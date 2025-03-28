@@ -6,30 +6,34 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/27 15:00:11 by tcali            ###   ########.fr       */
+/*   Updated: 2025/03/28 18:19:50 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
 #include "so_long.h"
-#include "assets.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
 
 void	load_assets(t_data *data)
 {
-	int	width;
-	int	height;
-
-	data->floor = mlx_xpm_file_to_image(data->mlx_ptr,
-			FLOOR_IMG_PATH, &width, &height);
-    data->wall = mlx_xpm_file_to_image(data->mlx_ptr,
-			WALL_IMG_PATH, &width, &height);
-    data->player = mlx_xpm_file_to_image(data->mlx_ptr,
-			PLAYER_IMG_PATH, &width, &height);
-	if (!data->floor || !data->wall || !data->player)
+	data->assets.height = 80;
+	data->assets.width = 80;
+	data->assets.floor = "./textures/ground_water.xpm";
+	data->assets.wall = "./textures/trees_rock.xpm";
+	data->assets.player = "./textures/Undead.xpm";
+	//data->assets.collect = "./textures/";
+	//data->assets.exit = "./textures/.xpm";
+	data->assets.xpm_floor = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->assets.floor, &(data->assets.width), &(data->assets.height));
+	data->assets.xpm_wall = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->assets.wall, &(data->assets.width), &(data->assets.height));
+	data->assets.xpm_player = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->assets.player, &(data->assets.width), &(data->assets.height));
+	//data->img.img_collect = mlx_xpm_file_to_image(data->mlx_ptr,
+	//		data->img.collect, &(data->img.width), &(data->img.height));
+	//data->img.img_exit = mlx_xpm_file_to_image(data->mlx_ptr, data->img.exit,
+	//		&(data->img.width), &(data->img.height));
+	if (!data->assets.xpm_floor || !data->assets.xpm_wall
+		|| !data->assets.xpm_player)
 	{
 		printf("Error loading images.\n");
 		exit(1);
@@ -58,7 +62,7 @@ int	on_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-int main(void)
+int	main(void)
 {
 	t_data	*data;
 	int		x;
