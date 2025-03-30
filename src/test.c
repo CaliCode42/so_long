@@ -6,20 +6,31 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/28 18:19:50 by tcali            ###   ########.fr       */
+/*   Updated: 2025/03/29 18:18:47 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
 #include "so_long.h"
 
+void	print_missing_file(t_data *data)
+{
+	if (!data->assets.xpm_floor)
+		printf("Error loading image: %s\n", data->assets.floor);
+	if (!data->assets.xpm_wall)
+		printf("Error loading image: %s\n", data->assets.wall);
+	if (!data->assets.xpm_player)
+		printf("Error loading image: %s\n", data->assets.player);
+}
+
+//fct to load textures
 void	load_assets(t_data *data)
 {
 	data->assets.height = 80;
 	data->assets.width = 80;
-	data->assets.floor = "./textures/ground_water.xpm";
-	data->assets.wall = "./textures/trees_rock.xpm";
-	data->assets.player = "./textures/Undead.xpm";
+	data->assets.floor = "home/tcali/so_long/textures/used/ground_water.xpm";
+	data->assets.wall = "home/tcali/so_long/textures/used/trees_rock.xpm";
+	data->assets.player = "home/tcali/so_long/textures/used/Undead.xpm";
 	//data->assets.collect = "./textures/";
 	//data->assets.exit = "./textures/.xpm";
 	data->assets.xpm_floor = mlx_xpm_file_to_image(data->mlx_ptr,
@@ -35,30 +46,39 @@ void	load_assets(t_data *data)
 	if (!data->assets.xpm_floor || !data->assets.xpm_wall
 		|| !data->assets.xpm_player)
 	{
-		printf("Error loading images.\n");
+		print_missing_file(data);
 		exit(1);
 	}
 }
 
-int	on_destroy(t_data *data)
+//fct to quit program and free mlx_ptr.
+void	clean_exit(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
 	free(data);
 	exit(0);
+}
+
+//fct to kill the processes of display
+int	on_destroy(t_data *data)
+{
+	clean_exit(data);
 	return (0);
 }
 
+//fct to call when Escape is pressed (to kill processes)
 int	on_keypress(int keysym, t_data *data)
 {
 	(void)data;
 	printf("Pressed key: %d\\n", keysym);
 	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		exit(0);
-	}
+		clean_exit(data);
 	return (0);
 }
 
@@ -81,12 +101,12 @@ int	main(void)
 		return (free(data->mlx_ptr), 1);
 	load_assets(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->floor, x, y);
+		data->assets.xpm_floor, x, y);
 	// Register key release hook
-	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
+	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, data);
 	// Register destroy hook
 	mlx_hook(data->win_ptr, DestroyNotify,
-		StructureNotifyMask, &on_destroy, &data);
+		StructureNotifyMask, &on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }

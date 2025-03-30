@@ -7,21 +7,21 @@ INCLUDE_DIR = includes
 MLX_DIR = mlx
 
 # Sources
-SRC = \
-	test.c \
+SRC := \
+	$(SRC_DIR)/test.c \
 
 #Path to sources
 VPATH := $(SRC_DIR)
 
 # Objects
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Compilation
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR)
+CC := gcc
+CFLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR)
 
 # Minilibx directories
-MLX_LIB = -L./mlx -lmlx -lX11 -lXext -lGL
+MLX_LIB := -L./mlx -lmlx -lX11 -lXext -lGL
 
 # Rules
 all: $(NAME)
