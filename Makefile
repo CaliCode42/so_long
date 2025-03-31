@@ -20,27 +20,32 @@ VPATH := $(SRC_DIR) $(GNL_DIR)
 
 # Objects
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
+OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) \
+			 $(addprefix $(OBJ_DIR)/, $(GNL_DIR:.c=.o)) \
 # Compilation
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR)
+CFLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR) -MMD -MP
 
 # Minilibx directories
 MLX_LIB := -L./mlx -lmlx -lX11 -lXext -lGL
 
+#Objects directory
+OBJDIRS := $(sort $(dir $(OBJ)))
+
 # Rules
 all: $(NAME)
 
-mlx:
+$(MLX_DIR):
 	make -C $(MLX_DIR)
 
-$(NAME): $(OBJ)
-	@make -C $(MLX_DIR)
+$(NAME): $(OBJ) $(MLX_DIR)
 	$(CC) $(OBJ) -o $(NAME) $(MLX_LIB)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c | $(OBJDIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIRS):
+	@mkdir -p $(OBJ_DIR)/gnl
 
 clean:
 	rm -rf $(OBJ_DIR)
