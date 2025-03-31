@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/29 18:18:47 by tcali            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:15:53 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,28 @@ void	load_assets(t_data *data)
 {
 	data->assets.height = 80;
 	data->assets.width = 80;
-	data->assets.floor = "home/tcali/so_long/textures/used/ground_water.xpm";
-	data->assets.wall = "home/tcali/so_long/textures/used/trees_rock.xpm";
-	data->assets.player = "home/tcali/so_long/textures/used/Undead.xpm";
+	data->assets.floor = "./textures/used/floor.xpm";
+	data->assets.wall = "./textures/used/tree.xpm";
+	data->assets.player = "./textures/used/undead.xpm";
 	//data->assets.collect = "./textures/";
 	//data->assets.exit = "./textures/.xpm";
 	data->assets.xpm_floor = mlx_xpm_file_to_image(data->mlx_ptr,
 			data->assets.floor, &(data->assets.width), &(data->assets.height));
-	data->assets.xpm_wall = mlx_xpm_file_to_image(data->mlx_ptr,
-			data->assets.wall, &(data->assets.width), &(data->assets.height));
-	data->assets.xpm_player = mlx_xpm_file_to_image(data->mlx_ptr,
-			data->assets.player, &(data->assets.width), &(data->assets.height));
+	// data->assets.xpm_wall = mlx_xpm_file_to_image(data->mlx_ptr,
+			// data->assets.wall, &(data->assets.width), &(data->assets.height));
+	// data->assets.xpm_player = mlx_xpm_file_to_image(data->mlx_ptr,
+			// data->assets.player, &(data->assets.width), &(data->assets.height));
 	//data->img.img_collect = mlx_xpm_file_to_image(data->mlx_ptr,
 	//		data->img.collect, &(data->img.width), &(data->img.height));
 	//data->img.img_exit = mlx_xpm_file_to_image(data->mlx_ptr, data->img.exit,
 	//		&(data->img.width), &(data->img.height));
-	if (!data->assets.xpm_floor || !data->assets.xpm_wall
-		|| !data->assets.xpm_player)
+	// if (!data->assets.xpm_floor || !data->assets.xpm_wall
+		// || !data->assets.xpm_player)
+	// {
+		// print_missing_file(data);
+		// exit(1);
+	// }
+	if (!data->assets.xpm_floor)
 	{
 		print_missing_file(data);
 		exit(1);
@@ -82,6 +87,40 @@ int	on_keypress(int keysym, t_data *data)
 	return (0);
 }
 
+void	display_textures(t_data *data, int x, int y)
+{
+	int	a;
+	int	b;
+	int	c;
+
+	a = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->assets.xpm_floor, x, y);
+	b = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->assets.xpm_floor, x, y);
+	c = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->assets.xpm_floor, x, y);
+	if (!a || !b || !c)
+	{
+		print_missing_file(data);
+	}
+}
+
+void	fill_with_floor(t_data *data, int x, int y)
+{
+	while (y < data->height)
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->assets.xpm_floor, x, y);
+		while (x < data->width)
+		{
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->assets.xpm_floor, x, y);
+				x++;
+		}
+		y++;
+	}
+}
+
 int	main(void)
 {
 	t_data	*data;
@@ -100,8 +139,10 @@ int	main(void)
 	if (!data->win_ptr)
 		return (free(data->mlx_ptr), 1);
 	load_assets(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->assets.xpm_floor, x, y);
+	fill_with_floor(data, x ,y);
+	//display_textures(data, x, y);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		// data->assets.xpm_floor, x, y);
 	// Register key release hook
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, data);
 	// Register destroy hook
