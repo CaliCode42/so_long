@@ -6,12 +6,13 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/28 18:20:09 by tcali            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:40:14 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# include "get_next_line.h"
 # include "../mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
