@@ -1,78 +1,78 @@
 Map checklist:
-	Parse the map
+TD	Parse the map
 
-		Does the map file exist ?
+TD		Does the map file exist ?
 
-		Is the map rectangular ?
+TD		Is the map rectangular ?
 
-		All the lines should be the same length.
+TD		All the lines should be the same length.
 
-		Is there something in the map file ?
+TD		Is there something in the map file ?
 
-		Is the map enclosed in walls ?
+TD		Is the map enclosed in walls ?
 
-		    Check the first and last lines and columns, they should all be 1
+TD		    Check the first and last lines and columns, they should all be 1
 
-		Is there only one exit ?
+TD		Is there only one exit ?
 
-		    Simply count how many E you find on the map.
+TD		    Simply count how many E you find on the map.
 
-		Is there only one start position ?
+TD		Is there only one start position ?
 
-		    Simply count how many P you find on the map.
+TD		    Simply count how many P you find on the map.
 
-		Is there at least one collectibles ?
+TD		Is there at least one collectibles ?
 
-		Simply count how many C you find on the map.
+TD		Simply count how many C you find on the map.
 
 Game checklist
 
-	Create a window using MiniLibX
+OK	Create a window using MiniLibX
 
-	    Create the required structure to store all the necessary information
+OK	    Create the required structure to store all the necessary information
 
-	Load all the required sprites (images) for your game and store them into memory
+TD	Load all the required sprites (images) for your game and store them into memory
 
-	Create the different hooks
+TD	Create the different hooks
 
-		key_handler
+OK		key_handler
 
-		mouse_handler (if necessary)
+TD		mouse_handler (if necessary)
 
-		close_handler, this is a hook on the red cross that closes the program correctly
+OK		close_handler, this is a hook on the red cross that closes the program correctly
 
-		loop_hook (=> you game loop)
+TD		loop_hook (=> you game loop)
 
 Render checklist
 
-	Draw the background
+TD	Draw the background
 
-	Draw the not movable parts of the map
+TD	Draw the not movable parts of the map
 
-	Draw the player
+TD	Draw the player
 
 Key handler
 
-	Is the requested new position a Wall ?
+TD	Is the requested new position a Wall ?
 
-		if the new position is a Wall, don't do anything.
+TD		if the new position is a Wall, don't do anything.
 		The subject says that the player should not be able to go through walls
 
-	Is the requested new position inside the map ?
+TD	Is the requested new position inside the map ?
 
-		if the new position is outside the map, don't do anything.
+TD		if the new position is outside the map, don't do anything.
 		Normally this shouldn't happen since the map is enclosed in walls but never too sure.
 
-	Is the requested new position a Collectible ?
+TD	Is the requested new position a Collectible ?
 
-		if yes, update the collected items counter and check
+TD		if yes, update the collected items counter and check
 
-			check if all collectibles have been collected
+TD			check if all collectibles have been collected
 
-			    if yes, unlock the exit
+TD			    if yes, unlock the exit
 
-		update map 2D array and replace collectible by "floor" tile so that it is not drawn 
+TD		update map 2D array and replace collectible by "floor" tile so that it is not drawn 
 		in the next iteration of the game loop.
 
-	If the requested new position is not a wall, nor a collectible, nor outside the map,
+TD	If the requested new position is not a wall, nor a collectible, nor outside the map,
 	simply set the player position to the requested new position.
