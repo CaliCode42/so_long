@@ -6,12 +6,11 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:39:24 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:12:02 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:24:59 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
-#include "../includes/ft_printf.h"
 #include "../includes/so_long.h"
 
 //fct to load textures

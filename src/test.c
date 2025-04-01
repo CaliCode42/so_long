@@ -6,12 +6,11 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:11:05 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:25:08 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
-#include "../includes/ft_printf.h"
 #include "../includes/so_long.h"
 
 int	main(void)

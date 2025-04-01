@@ -6,12 +6,12 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:35:42 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:10:47 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:21:02 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
-#include "../includes/ft_printf.h"
+#include "../libft/includes/ft_printf.h"
 #include "../includes/so_long.h"
 
 void	print_missing_file(t_data *data)

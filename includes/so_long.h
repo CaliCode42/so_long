@@ -6,15 +6,14 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:12:30 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:22:22 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "get_next_line.h"
-# include "ft_printf.h"
 # include "../mlx/mlx.h"
+# include "../libft/includes/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <X11/X.h>

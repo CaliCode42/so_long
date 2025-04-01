@@ -6,12 +6,12 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:42:15 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:13:16 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:21:57 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
-#include "../includes/ft_printf.h"
+#include "../libft/includes/ft_printf.h"
 #include "../includes/so_long.h"
 
 //fct to quit program and free mlx_ptr.
