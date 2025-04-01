@@ -6,13 +6,14 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/31 15:40:14 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 11:12:30 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "get_next_line.h"
+# include "ft_printf.h"
 # include "../mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -61,5 +62,17 @@ typedef struct s_data
 
 //functions
 void	load_assets(t_data *data);
+
+//Textures
+void	load_assets(t_data *data);
+void	set_textures(t_data *data, int x, int y);
+
+//Kill_process
+void	clean_exit(t_data *data);
+int		on_destroy(t_data *data);
+int		on_keypress(int keysym, t_data *data);
+
+//Debug
+void	print_missing_file(t_data *data);
 
 #endif

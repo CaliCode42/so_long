@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:58:48 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/31 15:39:37 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 11:08:46 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_strdup(const char *source)
 	return (copy);
 }
 
-char	*ft_strjoin(const char *s1, char const *s2)
+char	*ft_strjoin_gnl(const char *s1, char const *s2)
 {
 	int		total_len;
 	int		i;
@@ -97,7 +97,7 @@ char	*join_free(char *buffer, char *tmp_buf)
 {
 	char	*temp;
 
-	temp = ft_strjoin(buffer, tmp_buf);
+	temp = ft_strjoin_gnl(buffer, tmp_buf);
 	free(buffer);
 	return (temp);
 }
