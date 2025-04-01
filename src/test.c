@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 14:18:36 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 16:51:50 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 		ft_printf("fd = [%d]\nav[1] = %s\n", fd, av[1]);
 		if (fd < 0)
 			return (ft_printf("Error\nFailed to open file : %s.\n", av[1]), 1);
-		if (is_file_empty(av[1]))
+		if (get_next_line(fd) == NULL)
 		{
 			ft_printf("File is empty.\n");
 			close(fd);

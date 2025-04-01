@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:58:35 by tcali             #+#    #+#             */
-/*   Updated: 2025/03/31 15:39:27 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 16:56:19 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*read_file(int fd, char *buffer)
 	bytes_read = 1;
 	found_nl = 0;
 	if (!buffer)
-		buffer = ft_strdup("");
+		buffer = ft_strdup_gnl("");
 	tmp_buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!tmp_buf)
 		return (NULL);

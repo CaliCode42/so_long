@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:58:48 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:50:25 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 16:56:21 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 	// return (len);
 // }
 
-char	*ft_strchr(const char *s, int c)
+/*char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -38,9 +38,9 @@ char	*ft_strchr(const char *s, int c)
 	if ((unsigned char)c == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
-}
+}*/
 
-char	*ft_strdup(const char *source)
+char	*ft_strdup_gnl(const char *source)
 {
 	int		i;
 	char	*copy;
