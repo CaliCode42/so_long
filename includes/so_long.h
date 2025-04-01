@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 13:47:21 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 17:53:45 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	set_textures(t_data *data, int x, int y);
 
 //Map
 int		is_map_ber(char *str);
+void	read_map(int fd);
 
 //Kill_process
 void	clean_exit(t_data *data);
