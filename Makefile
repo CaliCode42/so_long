@@ -9,18 +9,19 @@ MLX_DIR = mlx
 
 # Sources
 SRC := \
-	$(SRC_DIR)/test.c \
+	test.c \
 
 GNL := \
-	$(GNL_DIR)/get_next_line.c \
-	$(GNL_DIR)/get_next_line_utils.c \
+	get_next_line.c \
+	get_next_line_utils.c \
 
 #Path to sources
-VPATH := $(SRC_DIR) $(GNL_DIR)
+SRC := $(addprefix $(SRC_DIR)/, $(SRC))
+GNL := $(addprefix $(GNL_DIR)/, $(GNL))
 
 # Objects
-OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o) \
-		$(GNL:$(GNL_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/$(SRC_DIR)/%.o) \
+		$(GNL:$(GNL_DIR)/%.c=$(OBJ_DIR)/$(GNL_DIR)/%.o)
 OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) \
 			 $(addprefix $(OBJ_DIR)/, $(GNL_DIR:.c=.o)) \
 # Compilation
@@ -42,11 +43,14 @@ $(MLX_DIR):
 $(NAME): $(OBJ) $(MLX_DIR)
 	$(CC) $(OBJ) -o $(NAME) $(MLX_LIB)
 
-$(OBJ_DIR)/%.o: %.c | $(OBJDIRS)
+$(OBJ_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJDIRS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/$(GNL_DIR)/%.o: $(GNL_DIR)/%.c | $(OBJDIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIRS):
-	@mkdir -p $(OBJDIRS)
+	@mkdir -p $(OBJDIRS) $(dir $(OBJ))
 
 clean:
 	rm -rf $(OBJ_DIR)
