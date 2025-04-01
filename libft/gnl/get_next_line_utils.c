@@ -6,21 +6,21 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:58:48 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:08:46 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 11:50:25 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-int	ft_strlen(const char *s)
-{
-	int	len;
+// int	ft_strlen(const char *s)
+// {
+	// int	len;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
+	// len = 0;
+	// while (s[len])
+		// len++;
+	// return (len);
+// }
 
 char	*ft_strchr(const char *s, int c)
 {

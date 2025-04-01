@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_render_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:43:12 by tcali            ###   ########.fr       */
+/*   Created: 2024/12/18 14:51:18 by tcali             #+#    #+#             */
+/*   Updated: 2025/03/25 23:57:11 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
 #include "../includes/ft_printf.h"
-#include "../includes/so_long.h"
 
-/*
-First need to check type of file (must be .ber)
-Then need to check if file is not empty.
-
-If map file has the right format and is not empty>>
-	map must be rectangular
-				enclosed by walls (first and last lines + columns = 1)
-			have only one exit (E)
-			have only one start position (P)
-			have at least three collectibles (C)
-*/
-
-void	is_map_ber(char *str)
+void	ft_render_format(t_printf *list)
 {
+	char	specifier;
+	char	pad;
+
+	specifier = list->format.specifier;
+	pad = list->format.pad;
+	pad = ' ';
+	if (specifier == '%')
+		ft_printchar(list, '%', pad);
+	else if (specifier == 'c')
+		ft_printchar(list, va_arg(list->ap, int), pad);
+	else if (specifier == 's')
+		ft_printstr(list, va_arg(list->ap, char *));
+	if (ft_present("pdiuxX", specifier))
+		ft_print_nb(list, specifier);
 }

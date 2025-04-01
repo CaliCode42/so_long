@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:43:12 by tcali            ###   ########.fr       */
+/*   Created: 2024/12/05 18:25:10 by tcali             #+#    #+#             */
+/*   Updated: 2025/03/25 23:56:19 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
 #include "../includes/ft_printf.h"
-#include "../includes/so_long.h"
 
-/*
-First need to check type of file (must be .ber)
-Then need to check if file is not empty.
-
-If map file has the right format and is not empty>>
-	map must be rectangular
-				enclosed by walls (first and last lines + columns = 1)
-			have only one exit (E)
-			have only one start position (P)
-			have at least three collectibles (C)
-*/
-
-void	is_map_ber(char *str)
+int	ft_atoi_base(t_printf *list)
 {
+	const char	*numbers;
+	int			numerator;
+
+	numbers = "0123456789";
+	numerator = 0;
+	while (ft_present(numbers, *list->str))
+		numerator = (numerator * 10) + (*list->str++ - '0');
+	return (numerator);
 }
