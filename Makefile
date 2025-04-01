@@ -12,6 +12,7 @@ MLX_DIR = mlx
 SRC := \
 	kill_process.c \
 	textures.c \
+	map.c \
 	test.c \
 
 DBG := \

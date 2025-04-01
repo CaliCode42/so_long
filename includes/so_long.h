@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 13:22:22 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:47:21 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SO_LONG_H
 # include "../mlx/mlx.h"
 # include "../libft/includes/ft_printf.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h" 
 # include <stdio.h>
 # include <stdlib.h>
 # include <X11/X.h>
@@ -65,6 +67,9 @@ void	load_assets(t_data *data);
 //Textures
 void	load_assets(t_data *data);
 void	set_textures(t_data *data, int x, int y);
+
+//Map
+int		is_map_ber(char *str);
 
 //Kill_process
 void	clean_exit(t_data *data);

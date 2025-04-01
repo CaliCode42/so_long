@@ -6,14 +6,15 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:34:56 by tcali             #+#    #+#             */
-/*   Updated: 2024/11/25 12:39:18 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:33:21 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-The strnstr() function locates the first	occurrence of the  null-terminated  
+The strnstr() function locates the first occurrence of the  null-terminated  
 string little in the string big, where not more than len characters are	
 searched. Characters that appear after	a `\0'	character  are not  searched.
+Returns a pointer to beginning of str little, or NULL if not found.
 */
 #include <unistd.h>
 

@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 13:25:12 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:55:15 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ If map file has the right format and is not empty>>
 			have at least three collectibles (C)
 */
 
-void	is_map_ber(char *str)
+//fct to check if map's format OK, expected ".ber"
+//Returns 1 if OK, 0 if KO.
+int	is_map_ber(char *str)
 {
+	char	*file_ok;
+	char	*ber;
+
+	ber = ".ber";
+	file_ok = ft_strnstr(str, ber, ft_strlen(str));
+	ft_printf("big = [%s]\nlittle = [%s]\n", str, ber);
+	if (file_ok == NULL)
+		return (0);
+	return (1);
 }
+
+//fct to check if file is empty, returns 1 if empty, 0 if OK.
+//int	is_file_empty(int fd);
