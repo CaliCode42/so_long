@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 17:00:32 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 17:15:02 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	symb_is_good(char c, t_data *data)
 
 int	count_is_good(t_data *data)
 {
-	if (data->content.count_c < 3)
+	if (data->content.count_c < 1)
 		return (ft_printf("Not enough collectibles, don't be greedy.\n"), 0);
 	if (data->content.count_e != 1)
 		return (ft_printf("Invalid nb of exit, basic maths LOL.\n"), 0);
@@ -247,10 +247,10 @@ OK	if file not empty -> use gnl to copy file's content into data->map.
 check if content OK : 
 OK	squared map 					>> is_squared_map
 OK	enclosed by walls 				>> enclosed_walls
-	only one E/P 					>> check_symbols
-	at least three C 				>> check_symbols
-	no other symbols in map (01ECP) >> check_symbols
-store size of map (height/widht) 	>> get_map_size? 
+OK	only one E/P 					>> check_symbols
+OK	at least three C 				>> check_symbols
+OK	no other symbols in map (01ECP) >> check_symbols
+OK store size of map (height/widht) >> get_map_size? 
 			May be stored directly with is_squared map 
 			(storing in data after checking if squared.)
 */

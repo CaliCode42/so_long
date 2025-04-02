@@ -1,30 +1,31 @@
 Map checklist:
 TD	Parse the map
 
-TD		Does the map file exist ?
+OK		Does the map file exist ?
 
-TD		Is the map rectangular ?
+OK		Is the map rectangular ?
 
-TD		All the lines should be the same length.
+OK		All the lines should be the same length.
 
-TD		Is there something in the map file ?
+OK		Is there something in the map file ?
 
-TD		Is the map enclosed in walls ?
+OK		Is the map enclosed in walls ?
 
-TD		    Check the first and last lines and columns, they should all be 1
+OK		    Check the first and last lines and columns, they should all be 1
 
-TD		Is there only one exit ?
+OK		Is there only one exit ?
 
-TD		    Simply count how many E you find on the map.
+OK		    Simply count how many E you find on the map.
 
-TD		Is there only one start position ?
+OK		Is there only one start position ?
 
-TD		    Simply count how many P you find on the map.
+OK		    Simply count how many P you find on the map.
 
-TD		Is there at least one collectibles ?
+OK		Is there at least one collectibles ?
 
-TD		Simply count how many C you find on the map.
+OK		Simply count how many C you find on the map.
 
+TD		Check if there's a valid path on the map.
 Game checklist
 
 OK	Create a window using MiniLibX
