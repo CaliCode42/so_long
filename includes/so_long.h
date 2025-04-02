@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 19:06:37 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 21:00:09 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdlib.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+
+typedef struct s_pos
+{
+	int	w;
+	int	h;
+}		t_pos;
 
 typedef struct s_con
 {
@@ -57,6 +63,7 @@ typedef struct s_data
 	int		width;
 	int		height;
 	int		count;
+	t_pos	p_pos;
 	t_con	content;
 	t_ass	assets;
 }			t_data;
@@ -67,7 +74,7 @@ void	set_textures(t_data *data, int x, int y);
 
 //Map
 int		is_map_ber(char *str);
-void	ft_free_map(t_data *data);
+void	ft_free_map(char **map);
 int		check_map(t_data *data);
 int		count_lines(const char *map_path);
 void	read_map(int fd, t_data *data, const char *map_path);
@@ -77,6 +84,11 @@ int		enclosed_walls(char **map, t_data *data);
 int		symb_is_good(char c, t_data *data);
 int		count_is_good(t_data *data);
 int		check_symbols(char **map, t_data *data);
+
+//flood_fill
+char	**copy_map(char **map, int height);
+void	flood_fill(char **map, int h, int w);
+int		check_valid_map(char **map, t_data *data);
 
 //init data
 void	set_content(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:13:38 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 19:00:44 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 20:42:26 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	enclosed_walls(char **map, t_data *data)
 		w = 0;
 		while (w < data->width)
 		{
-			if (h == 0 || h == data->height)
+			if (h == 0 || h == data->height - 1)
 			{
 				if (map[h][w] != data->content.w)
 					return (printf("Oopsie, there's a hole in the wall.\n"), 0);
 			}
-			if (w == 0 || w == data->width)
+			if (w == 0 || w == data->width - 1)
 			{
 				if (map[h][w] != data->content.w)
 					return (printf("Oopsie, there's a hole in the wall.\n"), 0);
@@ -103,6 +103,11 @@ int	check_symbols(char **map, t_data *data)
 		w = 0;
 		while (w < data->width)
 		{
+			if (map[h][w] == data->content.p)
+			{
+				data->p_pos.h = h;
+				data->p_pos.w = w;
+			}
 			if (symb_is_good(map[h][w], data) == 0)
 				return (0);
 			w++;

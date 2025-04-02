@@ -10,6 +10,7 @@ MLX_DIR = mlx
 
 # Sources
 SRC := \
+	flood_fill.c \
 	kill_process.c \
 	textures.c \
 	map.c \

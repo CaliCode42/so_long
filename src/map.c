@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 19:02:15 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 20:42:48 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ int	is_map_ber(char *str)
 }
 
 //fct to free map when map KO or before program end.
-void	ft_free_map(t_data *data)
+void	ft_free_map(char **map)
 {
 	int	i;
 
-	if (!data->map)
+	if (!map)
 		return ;
 	i = 0;
-	while (data->map[i])
+	while (map[i])
 	{
-		free(data->map[i]);
+		free(map[i]);
 		i++;
 	}
-	free (data->map);
+	free (map);
 }
 
 //fct which calls other fcts to check if map is valid.
@@ -63,6 +63,8 @@ int	check_map(t_data *data)
 		return (0);
 	if (check_symbols(data->map, data) == 0)
 		return (0);
+	if (check_valid_map(data->map, data) == 0)
+		return (ft_printf("Uh oh, map is not valid, trying to fool me?\n"), 0);
 	return (ft_printf("Beautiful map, muchas gracias.\n"), 1);
 }
 
@@ -127,7 +129,7 @@ void	read_map(int fd, t_data *data, const char *map_path)
 		i++;
 	}
 	if (check_map(data) == 0)
-		ft_free_map(data);
+		ft_free_map(data->map);
 }
 
 //fct to parse the map and stock the data 
