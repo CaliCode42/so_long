@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:08:11 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 21:00:39 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 21:03:51 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	check_valid_map(char **map, t_data *data)
 		}
 		h++;
 	}
-	print_map(map_copy);
 	ft_free_map(map_copy);
 	return (1);
 }

@@ -1,5 +1,5 @@
 Map checklist:
-TD	Parse the map
+OK	Parse the map
 
 OK		Does the map file exist ?
 
@@ -25,7 +25,7 @@ OK		Is there at least one collectibles ?
 
 OK		Simply count how many C you find on the map.
 
-TD		Check if there's a valid path on the map.
+OK		Check if there's a valid path on the map.
 Game checklist
 
 OK	Create a window using MiniLibX
