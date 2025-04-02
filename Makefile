@@ -13,6 +13,8 @@ SRC := \
 	kill_process.c \
 	textures.c \
 	map.c \
+	map2.c \
+	set.c \
 	test.c \
 
 DBG := \

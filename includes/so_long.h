@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 16:42:54 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 19:00:24 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,26 @@ typedef struct s_data
 	t_ass	assets;
 }			t_data;
 
-//functions
-void	load_assets(t_data *data);
-
 //Textures
 void	load_assets(t_data *data);
 void	set_textures(t_data *data, int x, int y);
 
 //Map
 int		is_map_ber(char *str);
+void	ft_free_map(t_data *data);
+int		check_map(t_data *data);
+int		count_lines(const char *map_path);
 void	read_map(int fd, t_data *data, const char *map_path);
+//Map2
+int		is_squared(char **map, t_data *data);
+int		enclosed_walls(char **map, t_data *data);
+int		symb_is_good(char c, t_data *data);
+int		count_is_good(t_data *data);
+int		check_symbols(char **map, t_data *data);
+
+
+//init data
+void	set_content(t_data *data);
 
 //Kill_process
 void	clean_exit(t_data *data);
