@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 19:00:24 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 19:06:37 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int		enclosed_walls(char **map, t_data *data);
 int		symb_is_good(char c, t_data *data);
 int		count_is_good(t_data *data);
 int		check_symbols(char **map, t_data *data);
-
 
 //init data
 void	set_content(t_data *data);

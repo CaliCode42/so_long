@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:02:06 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 11:47:11 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/02 19:05:23 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <unistd.h>
 # include "../includes/ft_printf.h"
-#include "../includes/get_next_line.h"
+# include "../includes/get_next_line.h"
 
 typedef struct s_content
 {
