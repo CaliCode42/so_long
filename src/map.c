@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 20:42:48 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/03 15:55:43 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ OK store size of map (height/widht) >> get_map_size?
 			(storing in data after checking if squared.)
 */
 
-//Prototype fo fct to check map's validity.
+//Prototype for fct to check map's validity.
 // if (all_collectables_collected && exit_count == 1)
 	// return map_valid;
 // if (on_wall)

@@ -6,12 +6,15 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/02 21:00:09 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/03 16:27:59 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# ifndef TILE_SIZE
+#  define TILE_SIZE 80
+# endif
 # include "../mlx/mlx.h"
 # include "../libft/includes/ft_printf.h"
 # include "../libft/includes/libft.h"

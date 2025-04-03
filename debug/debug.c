@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:35:42 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 13:21:02 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/03 18:38:03 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	print_missing_file(t_data *data)
 		ft_printf("Error loading image: %s\n", data->assets.floor);
 	if (!data->assets.xpm_wall)
 		ft_printf("Error loading image: %s\n", data->assets.wall);
+	if (!data->assets.xpm_collect)
+		ft_printf("Error loading image: %s\n", data->assets.collect);
 	if (!data->assets.xpm_player)
 		ft_printf("Error loading image: %s\n", data->assets.player);
+	if (!data->assets.xpm_exit)
+		ft_printf("Error loading image: %s\n", data->assets.exit);
 }
