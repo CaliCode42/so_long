@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 17:59:26 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 18:09:10 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	display_game(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 	{
-		printf("Error allocating memory.\n");
+		printf("Error\nAllocating memory.\n");
 		return ;
 	}
 	data->win_ptr = mlx_new_window(data->mlx_ptr, win_width, win_height,
@@ -111,9 +111,9 @@ int	main(int ac, char **av)
 
 	fd = 0;
 	if (ac != 2)
-		return (ft_printf("Error.\nProgram takes one argument.\n"), 1);
+		return (ft_printf("Error\nProgram takes one argument.\n"), 1);
 	if (is_map_ber(av[1]) == 0)
-		return (ft_printf("Error.\nArg must be of type %s.\n", ".ber"), 1);
+		return (ft_printf("Error\nArg must be of type %s.\n", ".ber"), 1);
 	else
 	{
 		data = malloc(sizeof(t_data));

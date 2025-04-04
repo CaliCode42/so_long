@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:13:38 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 17:42:02 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 18:08:34 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_squared(char **map, t_data *data)
 	{
 		if ((int)ft_strlen(map[i]) != data->width)
 		{
-			ft_printf("Error.\nUh oh, map not squared.\n");
+			ft_printf("Error\nUh oh, map not squared.\n");
 			return (0);
 		}
 		i++;
@@ -67,7 +67,7 @@ int	symb_is_good(char c, t_data *data)
 	if (c != data->content.f && (c != data->content.w)
 		&& (c != data->content.p) && (c != data->content.c)
 		&& (c != data->content.e))
-		return (ft_printf("Uh oh unknow symbol in the map.\n"), 0);
+		return (ft_printf("Error\nUh oh unknow symbol in the map.\n"), 0);
 	if (c == data->content.p)
 		data->content.count_p++;
 	if (c == data->content.c)
@@ -80,11 +80,20 @@ int	symb_is_good(char c, t_data *data)
 int	count_is_good(t_data *data)
 {
 	if (data->content.count_c < 1)
-		return (ft_printf("Not enough collectibles, don't be greedy.\n"), 0);
+	{
+		ft_printf("Error\nNot enough collectibles, don't be greedy.\n");
+		return (0);
+	}
 	if (data->content.count_e != 1)
-		return (ft_printf("Invalid nb of exit, basic maths LOL.\n"), 0);
+	{
+		ft_printf("Error\nInvalid nb of exit, basic maths LOL.\n");
+		return (0);
+	}
 	if (data->content.count_p != 1)
-		return (ft_printf("Invalid nb of player, basic maths LOL.\n"), 0);
+	{
+		ft_printf("Error\nInvalid nb of player, basic maths LOL.\n");
+		return (0);
+	}
 	return (1);
 }
 

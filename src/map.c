@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 17:42:20 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 18:51:50 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	check_map(t_data *data)
 		return (0);
 	if (enclosed_walls(data->map, data) == 0)
 	{
-		printf("Error.\nOopsie, there's a hole in the wall.\n");
+		printf("Error\nOopsie, there's a hole in the wall.\n");
 		return (0);
 	}
 	if (check_symbols(data->map, data) == 0)
 		return (0);
 	if (check_valid_map(data->map, data) == 0)
 	{
-		ft_printf("Error.\nUh oh, map is not valid, trying to fool me?\n");
+		ft_printf("Error\nUh oh, map is not valid, trying to fool me?\n");
 		return (0);
 	}
 	return (1);
@@ -60,14 +60,14 @@ int	check_map(t_data *data)
 
 //fct to count nb of lines map's file. 
 //(to know which size to alloc for the map)
-int	count_lines(const char *map_path)
+int	count_lines(const char *map_path, t_data *data)
 {
 	int		fd;
 	int		chars;
-	int		line_count;
+	int		not_empty;
 	char	tmp;
 
-	line_count = 0;
+	not_empty = 0;
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (-1);
@@ -75,13 +75,21 @@ int	count_lines(const char *map_path)
 	while (chars > 0)
 	{
 		if (tmp == '\n')
-			line_count++;
+		{
+			if (not_empty)
+				data->height++;
+			not_empty = 0;
+		}
+		else if (ft_present("10ECP", tmp))
+			not_empty = 1;
 		chars = read(fd, &tmp, 1);
 	}
+	if (not_empty)
+		data->height++;
 	close(fd);
 	if (chars == -1)
 		return (-1);
-	return (line_count);
+	return (data->height);
 }
 
 //fct which reads the map from fd and fetch it to struct data->map.
@@ -92,22 +100,22 @@ int	read_map(int fd, t_data *data, const char *map_path)
 	char	*line;
 
 	i = 0;
-	data->height = count_lines(map_path);
+	count_lines(map_path, data);
+	ft_printf("lines : %d\n", data->height);
 	if (data->height <= 0)
-		return (0);
+		return (ft_printf("Error\n"), 0);
 	data->map = malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map)
 		return (0);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && i < data->height)
 	{
-		data->map[i] = ft_substr(line, 0, ft_strlen(line) - 1);
+		data->map[i] = ft_substr(line, 0, ft_strlen(line) - 1);//need a fct to check if last line ends by \n
 		free(line);
 		i++;
 		line = get_next_line(fd);
 	}
-	if (line)
-		free(line);
+	free(line);
 	data->map[i] = NULL;
 	if (check_map(data) == 0)
 		return (clean_exit(data), 0);

@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:58:35 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/01 16:56:19 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 18:55:58 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,11 @@ char	*get_next_line(int fd)
 	if (!buffer[fd])
 		return (NULL);
 	line = ft_parse_line(buffer[fd]);
+	if (!line)
+		return (ft_free_set_null(&buffer[fd]), NULL);
 	buffer[fd] = ft_new_line(buffer[fd]);
+	if (!buffer[fd])
+		ft_free_set_null(&buffer[fd]);
 	return (line);
 }
 //int main(int argc, char **argv)

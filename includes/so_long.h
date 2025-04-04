@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 17:12:46 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 18:32:06 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_data
 //Map
 int		is_map_ber(char *str);
 int		check_map(t_data *data);
-int		count_lines(const char *map_path);
+int		count_lines(const char *map_path, t_data *data);
 int		read_map(int fd, t_data *data, const char *map_path);
 //Map2
 int		is_squared(char **map, t_data *data);
