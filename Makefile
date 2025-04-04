@@ -31,12 +31,10 @@ OBJ_FILES := $(addprefix $(OBJ_DIR)/$(SRC_DIR)/, $(SRC:.c=.o)) \
 
 # Compilation
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
+CFLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR) -MMD -MP
 
-#Library
+#Libraries
 LIBFT = $(LIBFT_DIR)/libft.a
-
-# Minilibx directories
 MLX_LIB := -L./mlx -lmlx -lX11 -lXext -lGL
 
 #Objects directory
@@ -48,10 +46,10 @@ all: $(NAME)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(MLX_DIR):
+$(MLX_DIR)/libmlx.a:
 	make -C $(MLX_DIR)
 
-$(NAME): $(OBJ_FILES) $(MLX_DIR) $(LIBFT)
+$(NAME): $(OBJ_FILES) $(MLX_DIR)/libmlx.a $(LIBFT)
 	$(CC) $(OBJ_FILES) -o $(NAME) $(MLX_LIB) -L$(LIBFT_DIR) -lft
 
 $(OBJ_DIR)/%.o: %.c | $(OBJDIRS)
@@ -71,6 +69,12 @@ fclean: clean
 re: fclean all
 
 debug : CFLAGS += -g
-debug : re
+debug : $(NAME)
 
-.PHONY: all clean fclean re mlx debug
+-include $(OBJ_FILES:.o=.d)
+
+.PHONY: all clean fclean re debug
+
+#-MMD → génère un fichier .d par .c, sans les headers système
+#-MP  → évite que make plante si un header est supprimé
+#-include → insère dynamiquement les dépendances dans le Makefile

@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 17:16:00 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:42:20 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@ int	check_map(t_data *data)
 	if (is_squared(data->map, data) == 0)
 		return (0);
 	if (enclosed_walls(data->map, data) == 0)
+	{
+		printf("Error.\nOopsie, there's a hole in the wall.\n");
 		return (0);
+	}
 	if (check_symbols(data->map, data) == 0)
 		return (0);
 	if (check_valid_map(data->map, data) == 0)
-		return (ft_printf("Uh oh, map is not valid, trying to fool me?\n"), 0);
-	return (ft_printf("Beautiful map, muchas gracias.\n"), 1);
+	{
+		ft_printf("Error.\nUh oh, map is not valid, trying to fool me?\n");
+		return (0);
+	}
+	return (1);
 }
 
 //fct to count nb of lines map's file. 
@@ -87,7 +93,6 @@ int	read_map(int fd, t_data *data, const char *map_path)
 
 	i = 0;
 	data->height = count_lines(map_path);
-	ft_printf("nb of lines : %d\n\n", data->height);
 	if (data->height <= 0)
 		return (0);
 	data->map = malloc(sizeof(char *) * (data->height + 1));
@@ -125,17 +130,3 @@ OK store size of map (height/widht) >> get_map_size?
 			May be stored directly with is_squared map 
 			(storing in data after checking if squared.)
 */
-
-//Prototype for fct to check map's validity.
-// if (all_collectables_collected && exit_count == 1)
-	// return map_valid;
-// if (on_wall)
-	// return map_invalid;
-// if (on_collectable)
-	// collectables++;
-// if (on_exit)
-	// exits++;
-// replace_current_position_with_wall;
-// if (one_of_the_four_adjacent_directions_is_possible)
-	// return map_valid;
-// return map_invalid;
