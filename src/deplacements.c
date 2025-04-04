@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:50:28 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 15:05:43 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:25:37 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	move_up(t_data *data)
 	if (is_move_possible(data, data->map[new_pos_h][new_pos_w]) == 1)
 	{
 		data->count++;
+		ft_printf("Moves : %d\n", data->count);
 		if (check_new_tile(data, data->map[new_pos_h][new_pos_w]) == -1)
 		{
 			ft_printf("Congrats cutiepie, you won in %d moves.\n", data->count);
@@ -46,6 +47,7 @@ void	move_down(t_data *data)
 	if (is_move_possible(data, data->map[new_pos_h][new_pos_w]) == 1)
 	{
 		data->count++;
+		ft_printf("Moves : %d\n", data->count);
 		if (check_new_tile(data, data->map[new_pos_h][new_pos_w]) == -1)
 		{
 			ft_printf("Congrats cutiepie, you won in %d moves.\n", data->count);
@@ -68,9 +70,10 @@ void	move_left(t_data *data)
 	if (is_move_possible(data, data->map[new_pos_h][new_pos_w]) == 1)
 	{
 		data->count++;
+		ft_printf("Moves : %d\n", data->count);
 		if (check_new_tile(data, data->map[new_pos_h][new_pos_w]) == -1)
 		{
-			ft_printf("Congrats cutiepie, you won in %d moves.\n", data->count);
+			ft_printf("Congrats cutiepie, you won in %d moves!\n", data->count);
 			destroy_xpm(data);
 		}
 		data->map[new_pos_h][new_pos_w] = data->content.p;
@@ -90,7 +93,7 @@ void	move_right(t_data *data)
 	if (is_move_possible(data, data->map[new_pos_h][new_pos_w]) == 1)
 	{
 		data->count++;
-		ft_printf("Moves : %d.\n", data->count);
+		ft_printf("Moves : %d\n", data->count);
 		if (check_new_tile(data, data->map[new_pos_h][new_pos_w]) == -1)
 		{
 			ft_printf("Congrats cutiepie, you won in %d moves.\n", data->count);

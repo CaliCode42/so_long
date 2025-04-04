@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:42:15 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 14:57:29 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:20:45 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 //fct to destroy images before clean_exit.
 void	destroy_xpm(t_data *data)
 {
-	if (data->map != NULL)
+	if (data->mlx_ptr)
 	{
-		ft_free_map(data->map);
 		mlx_destroy_image(data->mlx_ptr, data->assets.xpm_floor);
 		mlx_destroy_image(data->mlx_ptr, data->assets.xpm_wall);
 		mlx_destroy_image(data->mlx_ptr, data->assets.xpm_player);
@@ -39,9 +38,16 @@ void	clean_exit(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
-	if (data->map)
-		ft_free_map(data->map);
-	free(data);
+	if (data)
+	{
+		if (data->map != NULL)
+		{
+			ft_free_map(data->map);
+			data->map = NULL;
+		}
+		free(data);
+		data = NULL;
+	}
 	exit(0);
 }
 
@@ -59,14 +65,14 @@ int	on_destroy(t_data *data)
 //	ft_printf("Pressed key: %d\\n", keysym);
 //	if (keysym == XK_Escape)
 //		clean_exit(data);
-//	if (keysym == XK_w)
+//	if (keysym == XK_w || keysym == XK_UP)
 //		move_up(data);
-//	if (keysym == XK_s)
+//	if (keysym == XK_s || keysym == XK_Down)
 //		move_down(data);
-//	if (keysym == XK_a)
+//	if (keysym == XK_a || keysym == XK_Left)
 //		move_left(data);
-//	if (keysym == XK_d)
-//		move_down(data);
+//	if (keysym == XK_d || keysym == XK_Right)
+//		move_right(data);
 //	return (0);
 //}
 
@@ -74,18 +80,17 @@ int	on_destroy(t_data *data)
 //AZERTY
 int	on_keypress(int keysym, t_data *data)
 {
-	ft_printf("Pressed key: %d\\n", keysym);
 	if (keysym == XK_Escape)
 		clean_exit(data);
-	if (keysym == XK_z)
+	if (keysym == XK_z || keysym == XK_Up)
 		move_up(data);
-	if (keysym == XK_s)
+	if (keysym == XK_s || keysym == XK_Down)
 		move_down(data);
-	if (keysym == XK_q)
+	if (keysym == XK_q || keysym == XK_Left)
 		move_left(data);
-	if (keysym == XK_d)
+	if (keysym == XK_d || keysym == XK_Right)
 		move_right(data);
 	if (data->map)
-		render_map(data);
+		render_movables(data);
 	return (0);
 }

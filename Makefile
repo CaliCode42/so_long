@@ -14,11 +14,10 @@ SRC := \
 	deplacements.c \
 	flood_fill.c \
 	kill_process.c \
-	textures.c \
 	map.c \
 	map2.c \
-	set.c \
 	test.c \
+	utils.c \
 
 DBG := \
 	debug.c \

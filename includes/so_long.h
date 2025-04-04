@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 14:55:55 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:12:46 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,11 @@ typedef struct s_data
 	t_ass	assets;
 }			t_data;
 
-//Textures
-void	load_assets(t_data *data);
-void	set_textures(t_data *data, int x, int y);
-
 //Map
 int		is_map_ber(char *str);
-void	ft_free_map(char **map);
 int		check_map(t_data *data);
 int		count_lines(const char *map_path);
-void	read_map(int fd, t_data *data, const char *map_path);
+int		read_map(int fd, t_data *data, const char *map_path);
 //Map2
 int		is_squared(char **map, t_data *data);
 int		enclosed_walls(char **map, t_data *data);
@@ -95,6 +90,8 @@ int		check_valid_map(char **map, t_data *data);
 
 //display map
 int		render_map(t_data *data);
+void	render_background(t_data *data);
+void	render_movables(t_data *data);
 
 //check move
 int		is_move_possible(t_data *data, char c);
@@ -106,14 +103,18 @@ void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
 
-//init data
-void	set_content(t_data *data);
-
 //Kill_process
 void	destroy_xpm(t_data *data);
 void	clean_exit(t_data *data);
 int		on_destroy(t_data *data);
 int		on_keypress(int keysym, t_data *data);
+
+//utils
+void	init_data(t_data *data);
+void	set_content(t_data *data);
+void	load_assets(t_data *data);
+void	set_textures(t_data *data, int x, int y);
+void	ft_free_map(char **map);
 
 //Debug
 void	print_missing_file(t_data *data);

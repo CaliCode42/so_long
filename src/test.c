@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 14:48:05 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:20:00 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	render_movables(t_data *data)
 
 int	render_map(t_data *data)
 {
+	if (!data->map)
+		return (-1);
 	render_background(data);
 	render_movables(data);
 	return (0);
@@ -86,7 +88,8 @@ void	display_game(t_data *data)
 		printf("Error allocating memory.\n");
 		return ;
 	}
-	data->win_ptr = mlx_new_window(data->mlx_ptr, win_width, win_height, "SL");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, win_width, win_height,
+			"Evil Undead loves cats");
 	if (!data->win_ptr)
 	{
 		clean_exit(data);
@@ -108,47 +111,24 @@ int	main(int ac, char **av)
 
 	fd = 0;
 	if (ac != 2)
-		return (ft_printf("program takes one argument.\n"), 1);
+		return (ft_printf("Program takes one argument.\n"), 1);
 	if (is_map_ber(av[1]) == 0)
-		return (ft_printf("program takes an arg of type %s.\n", ".ber"), 1);
+		return (ft_printf("Program takes an arg of type %s.\n", ".ber"), 1);
 	else
 	{
 		data = malloc(sizeof(t_data));
+		if (!data)
+			return (1);
+		init_data(data);
 		fd = open(av[1], O_RDONLY);
-		ft_printf("fd = [%d]\nav[1] = %s\n", fd, av[1]);
-		if (fd > 0)
-			read_map(fd, data, av[1]);
-		else
+		if (fd <= 0)
+		{
+			free(data);
 			return (ft_printf("Error\nFailed to open file : %s.\n", av[1]), 1);
+		}
+		if (read_map(fd, data, av[1]) == 1)
+			display_game(data);
 		close (fd);
-		display_game(data);
 		return (0);
 	}
 }
-
-/*int	main(int ac, char **av)
-{
-	int		fd;
-
-	fd = 0;
-	if (ac != 2)
-		return (ft_printf("program takes one argument.\n"), 1);
-	if (is_map_ber(av[1]) == 0)
-		return (ft_printf("program takes an arg of type %s.\n", ".ber"), 1);
-	else
-	{
-		fd = open(av[1], O_RDONLY);
-		ft_printf("fd = [%d]\nav[1] = %s\n", fd, av[1]);
-		if (fd < 0)
-			return (ft_printf("Error\nFailed to open file : %s.\n", av[1]), 1);
-		if (get_next_line(fd) == NULL)
-		{
-			ft_printf("File is empty.\n");
-			close(fd);
-			return (1);
-		}
-		ft_printf("File opened successfully and not empty.\n");
-		close (fd);
-		return (0);
-	}
-}*/

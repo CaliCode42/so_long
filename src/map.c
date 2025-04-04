@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/03 15:55:43 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 17:16:00 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,6 @@ int	is_map_ber(char *str)
 	if (ft_strnstr(str, ber, ft_strlen(str)) == NULL)
 		return (0);
 	return (1);
-}
-
-//fct to free map when map KO or before program end.
-void	ft_free_map(char **map)
-{
-	int	i;
-
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free (map);
 }
 
 //fct which calls other fcts to check if map is valid.
@@ -96,7 +80,7 @@ int	count_lines(const char *map_path)
 
 //fct which reads the map from fd and fetch it to struct data->map.
 //Then checks if map is valid.
-void	read_map(int fd, t_data *data, const char *map_path)
+int	read_map(int fd, t_data *data, const char *map_path)
 {
 	int		i;
 	char	*line;
@@ -105,14 +89,13 @@ void	read_map(int fd, t_data *data, const char *map_path)
 	data->height = count_lines(map_path);
 	ft_printf("nb of lines : %d\n\n", data->height);
 	if (data->height <= 0)
-		return ;
+		return (0);
 	data->map = malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map)
-		return ;
+		return (0);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		ft_printf("map's line : \t%s", line);
 		data->map[i] = ft_substr(line, 0, ft_strlen(line) - 1);
 		free(line);
 		i++;
@@ -121,15 +104,9 @@ void	read_map(int fd, t_data *data, const char *map_path)
 	if (line)
 		free(line);
 	data->map[i] = NULL;
-	i = 0;
-	ft_printf("\n");
-	while (data->map[i])
-	{
-		ft_printf("map : \t\t[%s]\n", data->map[i]);
-		i++;
-	}
 	if (check_map(data) == 0)
-		ft_free_map(data->map);
+		return (clean_exit(data), 0);
+	return (1);
 }
 
 //fct to parse the map and stock the data 
