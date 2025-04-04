@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/03 16:27:59 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 14:55:55 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,24 @@ char	**copy_map(char **map, int height);
 void	flood_fill(char **map, int h, int w);
 int		check_valid_map(char **map, t_data *data);
 
+//display map
+int		render_map(t_data *data);
+
+//check move
+int		is_move_possible(t_data *data, char c);
+int		check_new_tile(t_data *data, char c);
+
+//deplacements
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+
 //init data
 void	set_content(t_data *data);
 
 //Kill_process
+void	destroy_xpm(t_data *data);
 void	clean_exit(t_data *data);
 int		on_destroy(t_data *data);
 int		on_keypress(int keysym, t_data *data);

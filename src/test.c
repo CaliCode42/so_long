@@ -6,14 +6,16 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:16:26 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/03 18:41:17 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/04 14:48:05 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx/mlx.h"
 #include "../includes/so_long.h"
 
-void	render_map(t_data *data)
+//fct which renders the fixed elements of the map (background)
+//What if map's file contain empty lines? Does it crash?
+void	render_background(t_data *data)
 {
 	int	x;
 	int	y;
@@ -24,27 +26,51 @@ void	render_map(t_data *data)
 		x = 0;
 		while (x < data->width)
 		{
-			// Placer le sol en premier pour éviter les trous visuels
-			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->assets.xpm_floor, x * TILE_SIZE, y * TILE_SIZE);
-
-			// Vérifier quel élément est présent à cette position et l'afficher
-			if (data->map[y][x] == '1') // Mur
+			if (data->map[y][x] == '0')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->assets.xpm_floor, x * TILE_SIZE, y * TILE_SIZE);
+			if (data->map[y][x] == '1')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					data->assets.xpm_wall, x * TILE_SIZE, y * TILE_SIZE);
-			else if (data->map[y][x] == 'C') // Collectible
+			x++;
+		}
+		y++;
+	}
+}
+
+//fct which renders the movables elements of the map 
+//(player, collectibles and exit).
+void	render_movables(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->height)
+	{
+		x = 0;
+		while (x < data->width)
+		{
+			if (data->map[y][x] == 'C')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					data->assets.xpm_collect, x * TILE_SIZE, y * TILE_SIZE);
-			else if (data->map[y][x] == 'E') // Sortie
+			else if (data->map[y][x] == 'E')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					data->assets.xpm_exit, x * TILE_SIZE, y * TILE_SIZE);
-			else if (data->map[y][x] == 'P') // Joueur
+			else if (data->map[y][x] == 'P')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					data->assets.xpm_player, x * TILE_SIZE, y * TILE_SIZE);
 			x++;
 		}
 		y++;
 	}
+}
+
+int	render_map(t_data *data)
+{
+	render_background(data);
+	render_movables(data);
+	return (0);
 }
 
 void	display_game(t_data *data)
@@ -68,7 +94,7 @@ void	display_game(t_data *data)
 	}
 	load_assets(data);
 	set_textures(data, win_width, win_height);
-	render_map(data);
+	mlx_loop_hook(data->mlx_ptr, render_map, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, data);
 	mlx_hook(data->win_ptr, DestroyNotify,
 		StructureNotifyMask, &on_destroy, data);
