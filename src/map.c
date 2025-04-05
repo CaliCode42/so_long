@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 18:51:50 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 15:17:43 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,21 @@ If map file has the right format and is not empty>>
 int	is_map_ber(char *str)
 {
 	char	*ber;
+	char	*file;
+	char	*filename;
 
+	filename = ft_strrchr(str, '/');
+	if (!filename)
+		filename = str;
+	else
+		filename++;
+	if (*filename == '.')
+		return (0);
 	ber = ".ber";
-	if (ft_strnstr(str, ber, ft_strlen(str)) == NULL)
+	file = ft_strnstr(filename, ber, ft_strlen(filename));
+	if (file == NULL)
+		return (0);
+	else if (ft_strlen(file) > 4)
 		return (0);
 	return (1);
 }
@@ -45,7 +57,7 @@ int	check_map(t_data *data)
 		return (0);
 	if (enclosed_walls(data->map, data) == 0)
 	{
-		printf("Error\nOopsie, there's a hole in the wall.\n");
+		ft_printf("Error\nOopsie, there's a hole in the wall.\n");
 		return (0);
 	}
 	if (check_symbols(data->map, data) == 0)
@@ -92,6 +104,31 @@ int	count_lines(const char *map_path, t_data *data)
 	return (data->height);
 }
 
+char	*check_line(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (ft_strchr(str, '\n') != NULL)
+		return (ft_substr(str, 0, len - 1));
+	else
+		return (ft_strdup(str));
+}
+
+void	print_map(char **map)
+{
+	int	i = 0;
+
+	ft_printf("\n------ MAP STATE ------\n");
+	while (map[i])
+	{
+		ft_printf("[%s]\n", map[i]);
+		i++;
+	}
+	ft_printf("-----------------------\n");
+}
+
+
 //fct which reads the map from fd and fetch it to struct data->map.
 //Then checks if map is valid.
 int	read_map(int fd, t_data *data, const char *map_path)
@@ -101,16 +138,15 @@ int	read_map(int fd, t_data *data, const char *map_path)
 
 	i = 0;
 	count_lines(map_path, data);
-	ft_printf("lines : %d\n", data->height);
 	if (data->height <= 0)
-		return (ft_printf("Error\n"), 0);
+		return (ft_printf("Error\nmap's so small it doesn't exist!\n"), 0);
 	data->map = malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map)
 		return (0);
 	line = get_next_line(fd);
 	while (line != NULL && i < data->height)
 	{
-		data->map[i] = ft_substr(line, 0, ft_strlen(line) - 1);//need a fct to check if last line ends by \n
+		data->map[i] = check_line(line);
 		free(line);
 		i++;
 		line = get_next_line(fd);
@@ -118,7 +154,7 @@ int	read_map(int fd, t_data *data, const char *map_path)
 	free(line);
 	data->map[i] = NULL;
 	if (check_map(data) == 0)
-		return (clean_exit(data), 0);
+		return (print_map(data->map), clean_exit(data), 0);
 	return (1);
 }
 

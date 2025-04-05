@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:08:11 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 16:32:27 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 15:17:22 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ char	**copy_map(char **map, int height)
 	return (copy);
 }
 
-void	print_map(char **map)
-{
-	int	i;
+//void	print_map(char **map)
+//{
+//	int	i;
 
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("map : \t\t[%s]\n", map[i]);
-		i++;
-	}
-}
+//	i = 0;
+//	while (map[i])
+//	{
+//		ft_printf("map : \t\t[%s]\n", map[i]);
+//		i++;
+//	}
+//}
 
 //fct which run through every reachable tile of the map
 //and mark them as 'R' (reached).

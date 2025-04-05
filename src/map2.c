@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:13:38 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 18:08:34 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 15:18:00 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_squared(char **map, t_data *data)
 	{
 		if ((int)ft_strlen(map[i]) != data->width)
 		{
+			ft_printf("width : %d\n", data->width);
+			ft_printf("line : %d\n", ft_strlen(map[i]));
 			ft_printf("Error\nUh oh, map not squared.\n");
 			return (0);
 		}
@@ -53,7 +55,7 @@ int	enclosed_walls(char **map, t_data *data)
 			if (w == 0 || w == data->width - 1)
 			{
 				if (map[h][w] != data->content.w)
-					return (printf("Oopsie, there's a hole in the wall.\n"), 0);
+					return (0);
 			}
 			w++;
 		}
