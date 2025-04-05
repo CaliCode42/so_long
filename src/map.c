@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:54:57 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/05 15:17:43 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 15:47:25 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	print_map(char **map)
 	ft_printf("-----------------------\n");
 }
 
-
 //fct which reads the map from fd and fetch it to struct data->map.
 //Then checks if map is valid.
 int	read_map(int fd, t_data *data, const char *map_path)
@@ -154,7 +153,7 @@ int	read_map(int fd, t_data *data, const char *map_path)
 	free(line);
 	data->map[i] = NULL;
 	if (check_map(data) == 0)
-		return (print_map(data->map), clean_exit(data), 0);
+		return (clean_exit(data), 0);
 	return (1);
 }
 

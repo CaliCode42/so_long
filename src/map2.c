@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:13:38 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/05 15:18:00 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 15:47:54 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	is_squared(char **map, t_data *data)
 	{
 		if ((int)ft_strlen(map[i]) != data->width)
 		{
-			ft_printf("width : %d\n", data->width);
-			ft_printf("line : %d\n", ft_strlen(map[i]));
+			//ft_printf("width : %d\n", data->width);
+			//ft_printf("line : %d\n", ft_strlen(map[i]));
 			ft_printf("Error\nUh oh, map not squared.\n");
 			return (0);
 		}

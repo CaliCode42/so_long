@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:35:44 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/04 18:32:06 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 16:12:31 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_con
 	int		count_p;
 	int		count_c;
 	int		count_e;
+	int		copy_count_c;
 }			t_con;
 
 typedef struct s_ass
@@ -85,7 +86,8 @@ int		check_symbols(char **map, t_data *data);
 
 //flood_fill
 char	**copy_map(char **map, int height);
-void	flood_fill(char **map, int h, int w);
+int		exit_reachable(char **map, int h, int w, t_data *data);
+void	flood_fill(char **map, int h, int w, t_data *data);
 int		check_valid_map(char **map, t_data *data);
 
 //display map
@@ -118,5 +120,6 @@ void	ft_free_map(char **map);
 
 //Debug
 void	print_missing_file(t_data *data);
+void	print_map(char **map);
 
 #endif

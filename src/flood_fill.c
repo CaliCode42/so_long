@@ -6,7 +6,7 @@
 /*   By: tcali <tcali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:08:11 by tcali             #+#    #+#             */
-/*   Updated: 2025/04/05 15:17:22 by tcali            ###   ########.fr       */
+/*   Updated: 2025/04/05 18:16:49 by tcali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,54 @@ char	**copy_map(char **map, int height)
 //	}
 //}
 
+int	reachable_tile(char **map, int h, int w)
+{
+	if (map[h][w] == '1' || map[h][w] == 'V')
+		return (0);
+	if (map[h][w] == 'R')
+		return (1);
+	if (map[h][w] != 'E')
+		map[h][w] = 'V';
+	if (reachable_tile(map, h + 1, w) == 1)
+		return (1);
+	if (reachable_tile(map, h, w + 1))
+		return (1);
+	if (reachable_tile(map, h - 1, w))
+		return (1);
+	if (reachable_tile(map, h, w - 1))
+		return (1);
+	return (0);
+}
+
+int	exit_reachable(char **map, int h, int w, t_data *data)
+{
+	if (map[h + 1][w] == '1' && map[h - 1][w] == '1'
+		&& map[h][w + 1] == '1' && map[h][w - 1] == '1')
+		return (0);
+	if (data->content.copy_count_c == 0 && reachable_tile(map, h, w) == 1)
+		return (1);
+	return (0);
+}
+
 //fct which run through every reachable tile of the map
 //and mark them as 'R' (reached).
-void	flood_fill(char **map, int h, int w)
+void	flood_fill(char **map, int h, int w, t_data *data)
 {
 	if (map[h][w] == '1' || map[h][w] == 'R')
 		return ;
+	if (map[h][w] == 'E' && data->content.copy_count_c > 0)
+	{
+		if (exit_reachable(map, h, w, data) == 0)
+			return ;
+		map[h][w] = 'R';
+	}
+	if (map[h][w] == 'C')
+		data->content.copy_count_c--;
 	map[h][w] = 'R';
-	flood_fill(map, h + 1, w);
-	flood_fill(map, h - 1, w);
-	flood_fill(map, h, w + 1);
-	flood_fill(map, h, w - 1);
+	flood_fill(map, h + 1, w, data);
+	flood_fill(map, h - 1, w, data);
+	flood_fill(map, h, w + 1, data);
+	flood_fill(map, h, w - 1, data);
 }
 
 int	check_valid_map(char **map, t_data *data)
@@ -72,7 +109,8 @@ int	check_valid_map(char **map, t_data *data)
 	map_copy = copy_map(map, data->height);
 	if (!map_copy)
 		return (0);
-	flood_fill(map_copy, data->p_pos.h, data->p_pos.w);
+	data->content.copy_count_c = data->content.count_c;
+	flood_fill(map_copy, data->p_pos.h, data->p_pos.w, data);
 	h = 0;
 	while (h < data->height)
 	{
@@ -81,6 +119,14 @@ int	check_valid_map(char **map, t_data *data)
 		{
 			if (map_copy[h][w] == 'C' || map_copy[h][w] == 'E')
 			{
+				if (map_copy[h][w] == 'E')
+				{
+					if (exit_reachable(map_copy, h, w, data) == 1)
+					{
+						map_copy[h][w] = 'R';
+						return (1);
+					}
+				}
 				ft_free_map(map_copy);
 				return (0);
 			}
